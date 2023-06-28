@@ -1,3 +1,6 @@
+In DetectorConstruction.cc you can find a few bool variables. Touch only variables of the kind IsScintEfficiency or IsScintDistance.
+All the other variables are for other setups, unrelated to our experiment.
+
 Be sure to modify the file Vpot.dat when changing the potentials needed for the simulation
 Here we report all the potentials that should be used in the various configurations when studying the efficiency of the
 scintillators:
