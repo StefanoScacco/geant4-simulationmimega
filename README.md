@@ -1,0 +1,82 @@
+# geant4-simulationmimega
+In DetectorConstruction.cc you can find a few bool variables. Touch only variables of the kind IsScintEfficiency or IsScintDistance.
+All the other variables are for other setups, unrelated to our experiment.
+
+Be sure to modify the file Vpot.dat when changing the potentials needed for the simulation
+Here we report all the potentials that should be used in the various configurations when studying the efficiency of the
+scintillators:
+
+WHEN MEASURING P2 WITHOUT LEAD:
+ - G1N at 1856 V
+ - G1B at 1860 V
+ - P2 tested at [1617 1664 1688 1715 1766 1815] V
+ - P3 not used
+
+WHEN MEASURING P2 WITH LEAD:
+ - G1N at 1856 V
+ - G1B at 1860 V
+ - P2 tested at	[1600 1650 1697 1754 1805] V
+ - P3 not used
+
+WHEN MEASURING P3 WITHOUT LEAD:
+ - G1N at 1856 V
+ - G1B at 1860 V
+ - P2 not used
+ - P3 tested at [1552 1615 1650 1664 1670 1714 1768 1815] V
+
+WHEN MEASURING P3 WITH LEAD:
+ - G1N at 1856 V
+ - G1B at 1860 V
+ - P2 not used
+ - P3 tested at	[1526 1580 1623 1672 1714 1761] V
+
+WHEN MEASURING G1N WITH LEAD:
+ - G1N tested at [1738 1779 1797 1820 1844 1893] V
+ - G1B not used
+ - P2 at 1700 V
+ - P3 at 1652 V
+
+WHEN MEASURING G1B WITH LEAD:
+ - G1N not used
+ - G1B tested at [1808 1841 1860 1905 1950] V 
+ - P2 at 1700 V
+ - P3 at 1652 V
+
+
+Instead, when simulating two scintillators at a distance, to modify distance just go to the file DetectorConstruction.cc and toggle with parameter d defined in the ConstructScintDistance() function.
+Our experiment was performed with:
+
+ - G1N at 1819 V
+ - G1B at 1865 V
+ - P2 not used
+ - P3 not used
+
+we tested distances at [8.0 14.5 24.5 50.5 72.5 88.5] cm
+
+Geometries can be modified by altering the values of the test bool variables isScintEfficiency or isScintDistance in the file DetectorConstruction.cc.
+Also, distance is controlled by the variable dScint, which can be modified in the constructor of DetectorConstruction.cc, or also in the GUI action, by inserting a new value in mm with the command /distanceScint/distance
+
+The efficiency functions that we experimentally fit are
+ - for G1N : eps(Vpot) = 0.97678/(1 + exp(-0.06211 * (Vpot - 1755.01) ) )
+ - for G1B : eps(Vpot) = 0.95598/(1 + exp(-0.05005 * (Vpot - 1815.88) ) )
+ - for P2 : eps(Vpot) = 0.92522/(1 + exp(-0.022 * (Vpot - 1541.97) ) )
+ - for P3 : eps(Vpot) = 0.92585/(1 + exp(-0.0769 * (Vpot - 1520.42) ) )
+
+Useful macros are:
+ - vis_cosmic.mac : it generates muons cosmically and allows for visualization (it takes much longer)
+ - run_cosmic.mac : runs many events of cosmic muons but does not allow visualization (fastest but low statistics)
+ - run.mac : runs direct muon hits at 3 GeV, and does not allow visualization (it takes longer)
+
+
+WHEN MEASURING ENERGY DEPOSIT
+We can also measure energy deposit. To do that, go to the file DetectorConstruction.cc and change the material of logicDetector (found in ConstructScintEfficiency + "name scintillator"), from worldVacuum to NaI. If you do that, you won't be able to record coincidences for that run, because of the photons generated. So you could either choose between energy deposit or coincidences (1 run at a time).
+
+
+WHEN CHECKING LEAD BLOCKAGE
+You can check that our lead barrier stops electrons and gamma rays. Set isScintLead = true, and change in the file Generator.cc the particle that you want to create. To score onto the lead barrier, in DetectorConstruction.cc just set fScoringVolume = logicLead.
+Energy deposit will not be 100 percent of the generated even though the shower is blocked. Blockage still works.
+
+
+SEED IS SET at the first line of Sim.cc
+
+DO NOT and I repeat, DO NOT touch the file Vpot.dat while a simulation is running
