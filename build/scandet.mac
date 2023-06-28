@@ -1,0 +1,6 @@
+# This is the macro we have to loop over to increase the number of columns
+# nCols is how we called the variable in the code, and cols is how we wrote the variable in det.mac
+/detector/nCols {cols}
+/run/reinitializeGeometry
+/run/beamOn 100
+

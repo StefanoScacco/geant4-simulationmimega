@@ -1,0 +1,2 @@
+# In this macro we want to generate vertical particles only
+/run/beamOn 1000

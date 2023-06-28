@@ -1,0 +1,6 @@
+# Run macro for the TOF setup: generate particles to travel between the detectors
+/run/initialize
+/gun/momentumAmp 1 GeV
+/gun/position 0 0 -5 m
+/gun/particle pi+ # Generate pions
+/run/beamOn 100 # Run 100 tries

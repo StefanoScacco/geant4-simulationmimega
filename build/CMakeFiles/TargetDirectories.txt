@@ -1,0 +1,4 @@
+/Users/stefano/Downloads/Physics Lab 2/Sim/build/CMakeFiles/Sim.dir
+/Users/stefano/Downloads/Physics Lab 2/Sim/build/CMakeFiles/B1.dir
+/Users/stefano/Downloads/Physics Lab 2/Sim/build/CMakeFiles/edit_cache.dir
+/Users/stefano/Downloads/Physics Lab 2/Sim/build/CMakeFiles/rebuild_cache.dir

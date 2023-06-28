@@ -1,0 +1,32 @@
+# Macro to execute commands for visualization
+/vis/open OGL
+
+# Sets viewpoint when running for the first time
+/vis/viewer/set/upVector 0 0 1
+/vis/viewer/set/viewpointVector 1 0 0
+
+/vis/drawVolume
+
+# Autorefreshes
+/vis/viewer/set/autoRefresh true
+
+# Adds trajectories of particles
+/vis/scene/add/trajectories smooth
+
+# Accumulates events
+/vis/scene/endOfEventAction accumulate
+
+# This adds scale
+/vis/scene/add/scale 10 cm
+
+# This adds axes
+/vis/scene/add/axes
+
+# This adds events ID to distinguish them
+/vis/scene/add/eventID
+
+# Define our proton gun
+# /gun/particle proton
+
+# This can be used for shower visualization
+# /vis/ogl/set/displayListLimit 5000000

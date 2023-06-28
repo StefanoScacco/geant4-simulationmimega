@@ -1,0 +1,3 @@
+# Faster way to implement a reinitialization of geometry for our detector
+# We execute command to loop over a program, name of variable over which we want to loop, starting value, end value, step increase
+/control/loop scandet.mac cols 10 100 10
