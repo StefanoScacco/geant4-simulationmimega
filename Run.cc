@@ -117,6 +117,10 @@ MyRunAction::MyRunAction(){ //we are trying to make it work by copying stuff fro
   //Four seen
   man->CreateNtupleIColumn("SeenT_G1N_G1B_P2_P3"); //coincidences of G1N, G1B, P2 and P3
   man->FinishNtuple(5);
+
+  //try to implement a histogra as well
+  man->CreateH1("Emuon", "Muon energy", 100, 0.7*GeV, 15.*GeV, "GeV");
+
 }
 
 MyRunAction::~MyRunAction(){

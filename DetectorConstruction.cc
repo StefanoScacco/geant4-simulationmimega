@@ -44,11 +44,11 @@ MyDetectorConstruction::MyDetectorConstruction()
   isTOF = false;
   isAtmosphere = false;
   
-  isScintEfficiencyP2 = true;
+  isScintEfficiencyP2 = false;
   isScintEfficiencyP3 = false;
   isScintEfficiencyG1N = false;
   isScintEfficiencyG1B = false;
-  isScintDistance = false;
+  isScintDistance = true;
   isScintLead = false;
 }
 

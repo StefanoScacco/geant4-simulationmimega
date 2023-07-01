@@ -102,6 +102,8 @@ G4bool MySensitiveDetector::ProcessHits(G4Step *Step, G4TouchableHistory *R0hist
     man->FillNtupleDColumn(3, 2, mass); //store mass of signal
     man->FillNtupleDColumn(3, 3, energy); //store energy of signal muon
     man->AddNtupleRow(3);
+
+    man->FillH1(0, energy);
   }
 
   return 0;
