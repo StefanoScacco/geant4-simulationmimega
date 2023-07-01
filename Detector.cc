@@ -109,7 +109,8 @@ G4bool MySensitiveDetector::ProcessHits(G4Step *Step, G4TouchableHistory *R0hist
     man->FillNtupleDColumn(3, 3, energy); //store energy of signal muon
     man->AddNtupleRow(3);
 
-    man->FillH1(0, energy);
+    man->FillH1(0, energy); //histogram of muon energy
+    man->FillH1(3, time); //histogram of muon TOF
   }
 
   return 0;
