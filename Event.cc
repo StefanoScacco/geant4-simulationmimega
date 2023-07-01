@@ -27,7 +27,8 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   G4AnalysisManager *man = G4AnalysisManager::Instance();
   man->FillNtupleDColumn(2, 0, fEdep);
   man->AddNtupleRow(2);
-  //G4cout << "Deposited energy: " << fEdep << G4endl;
+  man->FillH1(4, fEdep);
+  //  G4cout << "Deposited energy: " << fEdep << G4endl;
 
   //create the efficiencies of the detectors
   /*Also, here are the rules for reading files

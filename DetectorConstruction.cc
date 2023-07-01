@@ -28,7 +28,7 @@ MyDetectorConstruction::MyDetectorConstruction()
   pMessenger->DeclareProperty("distance", dScint, "Change Scintillator distance [mm]");
   
   //initial values for pmessenger
-  dScint = 60*cm;
+  dScint = 40*cm;
 
   //initialize the new materials that we need
   DefineMaterials();
@@ -125,7 +125,7 @@ void MyDetectorConstruction::DefineMaterials()
   G4MaterialPropertiesTable *mptNaI = new G4MaterialPropertiesTable();
   mptNaI->AddProperty("RINDEX", energy, rindexNaI, 2);
   mptNaI->AddProperty("SCINTILLATIONCOMPONENT1", energy, fraction, 2); //number of photons created in scintillation per energy scale
-  mptNaI->AddConstProperty("SCINTILLATIONYIELD", 38./MeV); //LY for energy, constant. Original value was 38./keV but it was too slow
+  mptNaI->AddConstProperty("SCINTILLATIONYIELD", 0./MeV); //LY for energy, constant. Original value was 38./keV but it was too slow
   mptNaI->AddConstProperty("RESOLUTIONSCALE", 1.0); //I have no idea 
   mptNaI->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 250*ns); //response time for scintillation light: it's decay time of energy level excited
   mptNaI->AddConstProperty("SCINTILLATIONYIELD1", 1.); //distribution of the photon emitted: fluctuation and eventual sigma parameter
@@ -598,7 +598,7 @@ void MyDetectorConstruction::ConstructScintDistance() {
 
   //create detectors
   //implement the photon detector next to the scintillator: same dimensions in y, z, just thinner
-  solidDetector = new G4Box("solidDetector", 2.5*cm, 5.*cm, 0.5*cm);
+  solidDetector = new G4Box("solidDetector", 5.*cm, 5.*cm, 0.5*cm);
   logicDetector = new G4LogicalVolume(solidDetector, worldVacuum, "logicDetector");
 
   /* It is fundamental to add the detectors with the following copy numbers:
@@ -606,16 +606,18 @@ void MyDetectorConstruction::ConstructScintDistance() {
    G1B: every detector related to it has copy number 3
    P2: every detector related to it has copy number 5
    P3: every detector related to it has copy number 7*/
-  physDetector = new G4PVPlacement(0, G4ThreeVector(-7.5*cm, 0.*cm, -dScint/2-1.*cm), logicDetector, "physDetectorG1N", logicWorld, false, 2, true);
-  physDetector = new G4PVPlacement(0, G4ThreeVector(-2.5*cm, 0.*cm, -dScint/2-1.*cm), logicDetector, "physDetectorG1N", logicWorld, false, 2, true);
-  physDetector = new G4PVPlacement(0, G4ThreeVector(2.5*cm, 0.*cm, -dScint/2-1.*cm), logicDetector, "physDetectorG1N", logicWorld, false, 2, true);
-  physDetector = new G4PVPlacement(0, G4ThreeVector(7.5*cm, 0.*cm, -dScint/2-1.*cm), logicDetector, "physDetectorG1N", logicWorld, false, 2, true);
+  physDetector = new G4PVPlacement(0, G4ThreeVector(-5*cm, 0.*cm, -dScint/2-1.*cm), logicDetector, "physDetectorG1N", logicWorld, false, 2, true);
+  physDetector = new G4PVPlacement(0, G4ThreeVector(5*cm, 0.*cm, -dScint/2-1.*cm), logicDetector, "physDetectorG1N", logicWorld, false, 2, true);
 
-  physDetector = new G4PVPlacement(0, G4ThreeVector(-7.5*cm, 0.*cm, dScint/2-1.*cm), logicDetector, "physDetectorG1B", logicWorld, false, 3, true);
-  physDetector = new G4PVPlacement(0, G4ThreeVector(-2.5*cm, 0.*cm, dScint/2-1.*cm), logicDetector, "physDetectorG1B", logicWorld, false, 3, true);
-  physDetector = new G4PVPlacement(0, G4ThreeVector(2.5*cm, 0.*cm, dScint/2-1.*cm), logicDetector, "physDetectorG1B", logicWorld, false, 3, true);
-  physDetector = new G4PVPlacement(0, G4ThreeVector(7.5*cm, 0.*cm, dScint/2-1.*cm), logicDetector, "physDetectorG1B", logicWorld, false, 3, true);
+  physDetector = new G4PVPlacement(0, G4ThreeVector(-5*cm, 0.*cm, dScint/2-1.*cm), logicDetector, "physDetectorG1B", logicWorld, false, 3, true);
+  physDetector = new G4PVPlacement(0, G4ThreeVector(5*cm, 0.*cm, dScint/2-1.*cm), logicDetector, "physDetectorG1B", logicWorld, false, 3, true);
 
+  //this is to simulate hits on MiMega
+  //  G4Rotate3D rotX(20*deg, G4ThreeVector(1, 0, 0));
+  //  G4Transform3D transformDet = (rotX);
+  //  physDetector = new G4PVPlacement(transformDet, logicDetector, "physDetectorP2", logicWorld, false, 5, true);
+  //  physDetector = new G4PVPlacement(0, G4ThreeVector(-2.5*cm, 0., 0.), logicDetector, "physDetectorP2", logicWorld, false, 5, true);
+  
   //create the coating on the scintillator
   G4LogicalSkinSurface *skin = new G4LogicalSkinSurface("skin", logicWorld, mirrorSurface);
 

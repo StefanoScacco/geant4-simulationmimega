@@ -124,6 +124,7 @@ MyRunAction::MyRunAction(){ //we are trying to make it work by copying stuff fro
   man->CreateH1("Wavelength", "Real scintillation photon wavelength", 100, 180*nm, 920*nm, "nm");
   man->CreateH1("Wavelengthseen", "Detected scintillation photon wavelength", 100, 180*nm, 920*nm, "nm");  
   man->CreateH1("TOF", "Time of flight of muons. 2 scintillators at 60 cm distance", 100, 0*ns, 5*ns, "ns");
+  man->CreateH1("Edeposited", "Muon energy deposition in the scintillators", 100, 1.*MeV, 8.*MeV, "MeV");
 }
 
 MyRunAction::~MyRunAction(){

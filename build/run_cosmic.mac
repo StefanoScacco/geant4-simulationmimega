@@ -229,5 +229,5 @@
 /gps/ene/calculate
 
 # Run properties
-/run/beamOn 100000
+/run/beamOn 833000
 # this is the expected number of muons in 5000 s that hits a surface of 1*m x 1*m, if the flux is I = 1/cm^2/min
