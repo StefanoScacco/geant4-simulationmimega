@@ -125,7 +125,7 @@ void MyDetectorConstruction::DefineMaterials()
   G4MaterialPropertiesTable *mptNaI = new G4MaterialPropertiesTable();
   mptNaI->AddProperty("RINDEX", energy, rindexNaI, 2);
   mptNaI->AddProperty("SCINTILLATIONCOMPONENT1", energy, fraction, 2); //number of photons created in scintillation per energy scale
-  mptNaI->AddConstProperty("SCINTILLATIONYIELD", 38./MeV); //LY for energy, constant. Original value was 38./keV but it was too slow
+  mptNaI->AddConstProperty("SCINTILLATIONYIELD", 38./keV); //LY for energy, constant. Original value was 38./keV but it was too slow
   mptNaI->AddConstProperty("RESOLUTIONSCALE", 1.0); //I have no idea 
   mptNaI->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 250*ns); //response time for scintillation light: it's decay time of energy level excited
   mptNaI->AddConstProperty("SCINTILLATIONYIELD1", 1.); //distribution of the photon emitted: fluctuation and eventual sigma parameter
@@ -599,7 +599,7 @@ void MyDetectorConstruction::ConstructScintDistance() {
   //create detectors
   //implement the photon detector next to the scintillator: same dimensions in y, z, just thinner
   solidDetector = new G4Box("solidDetector", 2.5*cm, 5.*cm, 0.5*cm);
-  logicDetector = new G4LogicalVolume(solidDetector, worldVacuum, "logicDetector");
+  logicDetector = new G4LogicalVolume(solidDetector, NaI, "logicDetector");
 
   /* It is fundamental to add the detectors with the following copy numbers:
    G1N: every detector related to it has copy number 2
@@ -617,7 +617,7 @@ void MyDetectorConstruction::ConstructScintDistance() {
   physDetector = new G4PVPlacement(0, G4ThreeVector(7.5*cm, 0.*cm, dScint/2-1.*cm), logicDetector, "physDetectorG1B", logicWorld, false, 3, true);
 
   //create the coating on the scintillator
-  G4LogicalSkinSurface *skin = new G4LogicalSkinSurface("skin", logicWorld, mirrorSurface);
+  //  G4LogicalSkinSurface *skin = new G4LogicalSkinSurface("skin", logicWorld, mirrorSurface);
 
   if (isScintLead)
     {

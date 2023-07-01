@@ -28,8 +28,8 @@ int main(int argc, char** argv)
   runManager->SetUserInitialization(new MyActionInitialization());
 
   //new physics process to simulate cosmic shower
-  //  G4VModularPhysicsList* physics = new QGSP_BERT();
-  // physics->RegisterPhysics(new G4DecayPhysics());
+  //G4VModularPhysicsList* physics = new QGSP_BERT();
+  //physics->RegisterPhysics(new G4DecayPhysics());
   //runManager->SetUserInitialization(physics);
 
   runManager->Initialize(); //must initialize to see something

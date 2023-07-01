@@ -26,6 +26,7 @@ MyRunAction::MyRunAction(){ //we are trying to make it work by copying stuff fro
   man->CreateNtupleDColumn("fX"); //position X of detector
   man->CreateNtupleDColumn("fY"); //position Y of detector
   man->CreateNtupleDColumn("fZ"); //position Z of detector
+  man->CreateNtupleDColumn("wavelength"); //wavelength of photon detected
   man->FinishNtuple(1); //end stuff
 
   //scoring purposes
@@ -118,9 +119,10 @@ MyRunAction::MyRunAction(){ //we are trying to make it work by copying stuff fro
   man->CreateNtupleIColumn("SeenT_G1N_G1B_P2_P3"); //coincidences of G1N, G1B, P2 and P3
   man->FinishNtuple(5);
 
-  //try to implement a histogra as well
+  //try to implement histograms as well
   man->CreateH1("Emuon", "Muon energy", 100, 0.7*GeV, 15.*GeV, "GeV");
-
+  man->CreateH1("Wavelength", "Real scintillation photon wavelength", 100, 180*nm, 920*nm, "nm");
+  man->CreateH1("Wavelengthseen", "Detected scintillation photon wavelength", 100, 180*nm, 920*nm, "nm");  
 }
 
 MyRunAction::~MyRunAction(){

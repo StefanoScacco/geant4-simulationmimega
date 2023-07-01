@@ -39,7 +39,8 @@ G4bool MySensitiveDetector::ProcessHits(G4Step *Step, G4TouchableHistory *R0hist
   G4ThreeVector posParticle = preStepPoint->GetPosition(); //acquires position at entrance in the detector
   G4ThreeVector momParticle = preStepPoint->GetMomentum(); //acquires momentum at entrance in the detector
 
-  G4double wlen = (1.239841939*eV/momParticle.mag())*1E+03; //wavelength in nm   //finally, write down position
+  G4double wlen_adim = (1.239841939*eV/momParticle.mag())*1E+03; //wavelength adimensional
+  G4double wlen = (1.239841939*eV/momParticle.mag())*1E+03*nm; //wavelength in nm   //finally, write down position
   //G4cout << "Photon position: " << posPhoton << G4endl;
 
   G4double mass = preStepPoint->GetMass(); //acquires mass of particle at entrance in the detector. For photons, it should be 0
@@ -49,7 +50,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step *Step, G4TouchableHistory *R0hist
   /*Global time is distance in time from creation of event in general, while Local time is the time from creation of specific particle. They are different during decaus, for example. Here, they are equal. IF YOU WANT TO IMPLEMENT TIME OF FLIGHT, NEED TO COMMENT LINE track->SetTrackStatus(fStopAndKill);*/
   G4double time = preStepPoint->GetGlobalTime(); //I want to take global time only when entering detector 
     
-  G4double eps = 0.1*MeV; //threshold for photon discrimination
+  G4double eps = 1*MeV; //threshold for photon discrimination
   G4double M_thresh = 100*MeV; //threshold for muon discrimination 
   
   /*in real life, though, we only have access to position of our detector, NOT the position of the photon. Therefore, we should access a "touchable" variable, which in our case should only be WHICH detector has fired the photon*/
@@ -80,16 +81,21 @@ G4bool MySensitiveDetector::ProcessHits(G4Step *Step, G4TouchableHistory *R0hist
     //man->FillNtupleDColumn(0, 7, time); //for TOF only
     man->AddNtupleRow(0);
 
+    man->FillH1(1, wlen); //real photon wavelength
+
     //SECOND NTUPLE: position of detector we can measure
     //We need to insert the quantum efficiency to check that the detector actually measures something
-    if(G4UniformRand() < quEff->Value(wlen))
+    if(G4UniformRand() < quEff->Value(wlen_adim))
       //just generate a random number between 0 and 1. If smaller than quantum efficiency calculated at that specific wlen, the detector measures the photon
       {
 	man->FillNtupleIColumn(1, 0, evt);
 	man->FillNtupleDColumn(1, 1, posDetector[0]);
 	man->FillNtupleDColumn(1, 2, posDetector[1]);
 	man->FillNtupleDColumn(1, 3, posDetector[2]);
+	man->FillNtupleDColumn(1, 4, wlen);
 	man->AddNtupleRow(1);
+
+	man->FillH1(2, wlen); //detected photon wavelength
 	//when a photon hits a sensor, class of detector activated and stores position of detector in root file
       }
     
