@@ -137,7 +137,8 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   if ((fCopyallSeen%6 == 0) && (fCopyallHit%7 == 0) )  man->FillNtupleIColumn(5, 16, NRuns); //coincidence G1N-G1B, hit by P3
   if ((fCopyallSeen%35 == 0) && (fCopyallHit%2 == 0) ) man->FillNtupleIColumn(5, 17, NRuns); //coincidence P2-P3, hit by G1N
   if ((fCopyallSeen%35 == 0) && (fCopyallHit%3 == 0) ) man->FillNtupleIColumn(5, 18, NRuns); //coincidence P2-P3, hit by G1B
-  if (fCopyallSeen%210 == 0) man->FillNtupleIColumn(5, 15, NRuns); //coincidence G1N-G1B-P2-P3
+  if (fCopyallSeen%210 == 0) man->FillNtupleIColumn(5, 19, NRuns); //coincidence G1N-G1B-P2-P3
+
   man->AddNtupleRow(5); //add the tuple at the end
 
   ID++;  //increment the ID

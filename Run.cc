@@ -108,8 +108,14 @@ MyRunAction::MyRunAction(){ //we are trying to make it work by copying stuff fro
   man->CreateNtupleIColumn("SeenN_G1N_P2_P3"); //coincidences of G1N, P2 and P3
   man->CreateNtupleIColumn("SeenO_G1B_P2_P3"); //coincidences of G1B, P2 and P3
 
+  //Two seen one not even hit (efficiency correction)
+  man->CreateNtupleIColumn("SeenP_G1N_G1B_hitP2"); //coincidences of G1N, G1B hit by P2
+  man->CreateNtupleIColumn("SeenQ_G1N_G1B_hitP3"); //coincidences of G1N, G1B hit by P3
+  man->CreateNtupleIColumn("SeenR_hitG1N_P2_P3"); //coincidences of P2 and P3 hit by G1N
+  man->CreateNtupleIColumn("SeenS_hitG1B_P2_P3"); //coincidences of P2 and P3 hit by G1B
+  
   //Four seen
-  man->CreateNtupleIColumn("SeenP_G1N_G1B_P2_P3"); //coincidences of G1N, G1B, P2 and P3
+  man->CreateNtupleIColumn("SeenT_G1N_G1B_P2_P3"); //coincidences of G1N, G1B, P2 and P3
   man->FinishNtuple(5);
 }
 
