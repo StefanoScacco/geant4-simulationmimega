@@ -21,6 +21,7 @@ void MySteppingAction::UserSteppingAction(const G4Step *Step) {
 
   //all we have to do is get the energy from the step class and sum it over all possible steps to form the single event, so we can hand the total energy over to the Event class, and multiply all the copy numbers from detector
   G4double edep = Step->GetTotalEnergyDeposit();
+  //  G4cout << "Step energy deposit: " << edep << G4endl;
   G4double mass = Step->GetPreStepPoint()->GetMass();
   G4double M_thresh = 100*MeV;
   G4int copyall = 1;

@@ -50,7 +50,7 @@ G4bool MySensitiveDetector::ProcessHits(G4Step *Step, G4TouchableHistory *R0hist
   /*Global time is distance in time from creation of event in general, while Local time is the time from creation of specific particle. They are different during decaus, for example. Here, they are equal. IF YOU WANT TO IMPLEMENT TIME OF FLIGHT, NEED TO COMMENT LINE track->SetTrackStatus(fStopAndKill);*/
   G4double time = preStepPoint->GetGlobalTime(); //I want to take global time only when entering detector 
     
-  G4double eps = 1*MeV; //threshold for photon discrimination
+  G4double eps = 0.1*MeV; //threshold for photon discrimination
   G4double M_thresh = 100*MeV; //threshold for muon discrimination 
   
   /*in real life, though, we only have access to position of our detector, NOT the position of the photon. Therefore, we should access a "touchable" variable, which in our case should only be WHICH detector has fired the photon*/

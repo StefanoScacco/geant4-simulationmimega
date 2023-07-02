@@ -13,12 +13,12 @@ MyPrimaryGenerator::MyPrimaryGenerator() {
   G4ParticleDefinition *particle = particleTable->FindParticle(particleName);
 
   //define momentum and position of particle. Now it is a muon up-down
-  G4ThreeVector position(0.*m, 0.*m, 0.5*m); 
+  G4ThreeVector position(0.*m, 0.*m, 50*cm); 
   G4ThreeVector momentum(0., 0., -1.);
 
   //and just set them in the gun
   fParticleGun->SetParticleDefinition(particle);
-  fParticleGun->GetCurrentSource()->GetEneDist()->SetMonoEnergy(3.*GeV);
+  fParticleGun->GetCurrentSource()->GetEneDist()->SetMonoEnergy(3*GeV);
   fParticleGun->GetCurrentSource()->GetPosDist()->SetCentreCoords(position);
   fParticleGun->GetCurrentSource()->GetAngDist()->SetParticleMomentumDirection(momentum); 
 }
