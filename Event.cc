@@ -28,7 +28,7 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   man->FillNtupleDColumn(2, 0, fEdep);
   man->AddNtupleRow(2);
   man->FillH1(4, fEdep);
-  G4cout << "Deposited energy: " << fEdep << G4endl;
+  //  G4cout << "Deposited energy: " << fEdep << G4endl;
 
   //create the efficiencies of the detectors
   /*Also, here are the rules for reading files
@@ -143,7 +143,7 @@ void MyEventAction::EndOfEventAction(const G4Event*)
   man->AddNtupleRow(5); //add the tuple at the end
 
   ID++;  //increment the ID
-  if (ID%10 == 0) G4cout << "Event number: " << ID << G4endl;
+  if (ID%1000 == 0) G4cout << "Event number: " << ID << G4endl;
   if (ID == 1)
     {
       G4cout << G4endl;
